@@ -10,12 +10,7 @@ describe('upload avatar', () => {
       signKey: process.env.signKey
     })
 
-    const accessToken = await fetchAccessToken()
-
-    const response = await uploadAvatar(
-      'https://static.legoit.com/steve-jobs.jpg',
-      accessToken
-    )
+    const response = await uploadAvatar('https://static.legoit.com/steve-jobs.jpg')
 
     expect(response.result.filePath).not.toBe('')
   })

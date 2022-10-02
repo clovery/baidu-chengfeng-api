@@ -4,6 +4,7 @@ import FormData from 'form-data'
 
 import { getSign } from '../core/sign'
 import { baseUrl } from '../env'
+import { fetchAccessToken } from '../token'
 
 /**
  * 上传头像
@@ -11,12 +12,10 @@ import { baseUrl } from '../env'
  * @param accessToken string
  * @returns
  */
-export async function uploadAvatar(
-  fileUrl: string,
-  accessToken: string
-): Promise<UploadAvatarResponse> {
-  const form = new FormData()
+export async function uploadAvatar(fileUrl: string): Promise<UploadAvatarResponse> {
+  const accessToken = await fetchAccessToken()
 
+  const form = new FormData()
   const response = await axios.get(fileUrl, { responseType: 'stream' })
   const file = response.data
   const filename = path.basename(fileUrl)
