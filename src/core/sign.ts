@@ -82,7 +82,7 @@ function signJsonObject(obj, signKey, floor) {
       if (result.length > 0) {
         var rs = result.sort().join('&')
         var value = CryptoJS.MD5(rs)
-        console.log('加密前字符串：' + rs + '\n加密后MD5：' + value)
+        // console.log('加密前字符串：' + rs + '\n加密后MD5：' + value)
       }
     } else {
       value = obj[entity]
