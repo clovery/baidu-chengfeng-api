@@ -1,5 +1,5 @@
 {
-  "name": "@clovery/dumu",
+  "name": "@clovery/baidu-chengfeng-api",
   "version": "0.0.4",
   "description": "",
   "main": "out/index.js",
@@ -29,9 +29,9 @@
   "files": [
     "out"
   ],
-  "homepage": "https://github.com/clovery/dumu",
+  "homepage": "https://github.com/clovery/baidu-chengfeng-api",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clovery/dumu.git"
+    "url": "git+https://github.com/clovery/baidu-chengfeng-api.git"
   }
 }
