@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/clovery/baidu-chengfeng-api/compare/v0.0.7...v0.0.8) (2022-10-31)
+
+
+### Bug Fixes
+
+* 修复有 mime 的字符串没有通过判断 ([9fbd18c](https://github.com/clovery/baidu-chengfeng-api/commit/9fbd18c685b4054daefce7fb37b3a60bf7c67fb0))
+
 ### [0.0.7](https://github.com/clovery/baidu-chengfeng-api/compare/v0.0.6...v0.0.7) (2022-10-31)
 
 
