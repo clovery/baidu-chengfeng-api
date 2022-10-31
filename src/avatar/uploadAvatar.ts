@@ -22,7 +22,7 @@ export async function uploadAvatar(fileUrl: string | File, filename: string = 'a
   let file: File | null = null
 
   if (typeof fileUrl === 'string') {
-    if (isBase64(fileUrl)) {
+    if (isBase64(fileUrl, { allowMime: true })) {
       file = dataURLtoFile(fileUrl, filename)
     } {
       const response = await axios.get(fileUrl, { responseType: 'stream' })
