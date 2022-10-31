@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/clovery/baidu-chengfeng-api/compare/v0.0.6...v0.0.7) (2022-10-31)
+
+
+### Features
+
+* 支持 base64 和 file 对象上传头像 ([0a4ee18](https://github.com/clovery/baidu-chengfeng-api/commit/0a4ee18495504587ff0e0805c6bfa785ff0dbe64))
+
 ### [0.0.6](https://github.com/clovery/baidu-chengfeng-api/compare/v0.0.5...v0.0.6) (2022-10-24)
 
 ### [0.0.5](https://github.com/clovery/baidu-chengfeng-api/compare/v0.0.4...v0.0.5) (2022-10-04)
