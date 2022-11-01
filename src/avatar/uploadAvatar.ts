@@ -13,41 +13,13 @@ import { fetchAccessToken } from '../token'
  * @returns
  */
 export async function uploadAvatar(fileUrl: string, filename: string = 'avatar'): Promise<UploadAvatarResponse> {
-  const accessToken = await fetchAccessToken()
-
-  const config: AxiosRequestConfig = {
-    method: 'POST',
-    headers: {}
-  }
-
   if (isBase64(fileUrl, { allowMime: true })) {
-    const payload = {
-      needVerify: true,
-      image: fileUrl.includes('data:image') ? fileUrl.split(',')[1] : fileUrl
-    }
-
-    const signParams = await getSign(payload)
-    config.data = {
-      ...signParams,
-      ...payload
-    }
+    return uploadBase64Avatar(fileUrl)
   } else if (fileUrl.slice(0, 4) === 'http') {
-    const response = await axios.get(fileUrl, { responseType: 'stream' })
-    const form = new FormData()
-    const file = response.data
-    form.append('file', file, filename)
-    const signParams = await getSign({ file: '' })
-
-    form.append('nonce', signParams.nonce)
-    form.append('businessSign', signParams.businessSign)
-    form.append('businessTimestamp', signParams.businessTimestamp)
-    config.headers['Content-Type'] = 'multipart/form-data'
-    config.data = form
+    return uploadUrlAvatar(fileUrl)
   }
 
-  const res = await axios(`${baseUrl}/person/file/image/avatar?access_token=${accessToken}`, config)
-
-  return res.data
+  return Promise.reject('只支持 base64 和 url 形式的图片')
 }
 
 type UploadAvatarResponse = {
@@ -58,4 +30,50 @@ type UploadAvatarResponse = {
   }
   error_code: number
   error_msg: string
+}
+
+
+async function uploadBase64Avatar(fileUrl: string) {
+  const accessToken = await fetchAccessToken()
+  const config: AxiosRequestConfig = {
+    method: 'POST',
+    headers: {}
+  }
+
+
+  const payload = {
+    needVerify: true,
+    image: fileUrl.includes('data:image') ? fileUrl.split(',')[1] : fileUrl
+  }
+  const signParams = await getSign({ needVerify: true })
+  config.data = {
+    ...signParams,
+    ...payload
+  }
+  const res = await axios(`${baseUrl}/person/base64/image/avatar?access_token=${accessToken}`, config)
+  return res.data
+}
+
+async function uploadUrlAvatar(fileUrl: string, filename: string = 'avatar') {
+  const accessToken = await fetchAccessToken()
+
+  const config: AxiosRequestConfig = {
+    method: 'POST',
+    headers: {}
+  }
+
+  const response = await axios.get(fileUrl, { responseType: 'stream' })
+  const form = new FormData()
+  const file = response.data
+  form.append('file', file, filename)
+  const signParams = await getSign({ file: '' })
+
+  form.append('nonce', signParams.nonce)
+  form.append('businessSign', signParams.businessSign)
+  form.append('businessTimestamp', signParams.businessTimestamp)
+  config.headers['Content-Type'] = 'multipart/form-data'
+  config.data = form
+
+  const res = await axios(`${baseUrl}/person/file/image/avatar?access_token=${accessToken}`, config)
+  return res.data
 }
